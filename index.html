@@ -9,11 +9,27 @@
 <body>
     <div id="dashboard" class="page">
         <h1>Dashboard</h1>
-        <p>Welcome to your expense tracker dashboard.</p>
+        <div class="analysis">
+            <div>
+                <h2>Budget</h2>
+                <p>$<span id="dashboard-budget">0.00</span></p>
+            </div>
+            <div>
+                <h2>Expenses</h2>
+                <p>$<span id="dashboard-expenses">0.00</span></p>
+            </div>
+            <div>
+                <h2>Remaining</h2>
+                <p>$<span id="dashboard-remaining">0.00</span></p>
+            </div>
+        </div>
     </div>
     <div id="budget" class="page" style="display: none;">
         <h1>Budget</h1>
-        <p>Set and manage your budget here.</p>
+        <form id="budget-form">
+            <input type="number" id="budget-amount" placeholder="Enter your budget" required>
+            <button type="submit">Set Budget</button>
+        </form>
     </div>
     <div id="expenses" class="page" style="display: none;">
         <div class="container">

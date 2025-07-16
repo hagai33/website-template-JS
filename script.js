@@ -7,7 +7,8 @@ const totalAmount = document.getElementById('total-amount');
 const pages = document.querySelectorAll('.page');
 const navLinks = document.querySelectorAll('nav a');
 
-let expenses = [];
+let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+let budget = localStorage.getItem('budget') || 0;
 
 function showPage(pageId) {
     pages.forEach(page => {
@@ -23,6 +24,19 @@ function handleRouteChange() {
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('load', handleRouteChange);
 
+function renderDashboard() {
+    const dashboardBudget = document.getElementById('dashboard-budget');
+    const dashboardExpenses = document.getElementById('dashboard-expenses');
+    const dashboardRemaining = document.getElementById('dashboard-remaining');
+
+    const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+    const remaining = budget - totalExpenses;
+
+    dashboardBudget.textContent = parseFloat(budget).toFixed(2);
+    dashboardExpenses.textContent = totalExpenses.toFixed(2);
+    dashboardRemaining.textContent = remaining.toFixed(2);
+}
+
 function renderExpenses() {
     expenseList.innerHTML = '';
     let total = 0;
@@ -37,6 +51,7 @@ function renderExpenses() {
         total += expense.amount;
     });
     totalAmount.textContent = total.toFixed(2);
+    renderDashboard();
 }
 
 function addExpense(e) {
@@ -45,6 +60,7 @@ function addExpense(e) {
     const amount = parseFloat(expenseAmount.value);
     if (name && amount) {
         expenses.push({ name, amount });
+        localStorage.setItem('expenses', JSON.stringify(expenses));
         renderExpenses();
         expenseName.value = '';
         expenseAmount.value = '';
@@ -55,10 +71,23 @@ function deleteExpense(e) {
     if (e.target.classList.contains('delete-btn')) {
         const index = e.target.dataset.index;
         expenses.splice(index, 1);
+        localStorage.setItem('expenses', JSON.stringify(expenses));
         renderExpenses();
     }
 }
 
+const budgetForm = document.getElementById('budget-form');
+const budgetAmount = document.getElementById('budget-amount');
+
+function setBudget(e) {
+    e.preventDefault();
+    budget = parseFloat(budgetAmount.value);
+    localStorage.setItem('budget', budget);
+    budgetAmount.value = '';
+    alert('Budget set successfully!');
+}
+
+budgetForm.addEventListener('submit', setBudget);
 expenseForm.addEventListener('submit', addExpense);
 expenseList.addEventListener('click', deleteExpense);
 
