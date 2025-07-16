@@ -4,7 +4,24 @@ const expenseAmount = document.getElementById('expense-amount');
 const expenseList = document.getElementById('expense-list');
 const totalAmount = document.getElementById('total-amount');
 
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('nav a');
+
 let expenses = [];
+
+function showPage(pageId) {
+    pages.forEach(page => {
+        page.style.display = page.id === pageId ? 'block' : 'none';
+    });
+}
+
+function handleRouteChange() {
+    const pageId = window.location.hash.substring(1) || 'dashboard';
+    showPage(pageId);
+}
+
+window.addEventListener('hashchange', handleRouteChange);
+window.addEventListener('load', handleRouteChange);
 
 function renderExpenses() {
     expenseList.innerHTML = '';

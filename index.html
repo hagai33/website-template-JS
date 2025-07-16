@@ -7,26 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Expense Tracker</h1>
-        <form id="expense-form">
-            <input type="text" id="expense-name" placeholder="Expense Name" required>
-            <input type="number" id="expense-amount" placeholder="Amount" required>
-            <button type="submit">Add Expense</button>
-        </form>
-        <table id="expense-table">
-            <thead>
-                <tr>
-                    <th>Expense</th>
-                    <th>Amount</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="expense-list">
-            </tbody>
-        </table>
-        <h2>Total: $<span id="total-amount">0.00</span></h2>
+    <div id="dashboard" class="page">
+        <h1>Dashboard</h1>
+        <p>Welcome to your expense tracker dashboard.</p>
+    </div>
+    <div id="budget" class="page" style="display: none;">
+        <h1>Budget</h1>
+        <p>Set and manage your budget here.</p>
+    </div>
+    <div id="expenses" class="page" style="display: none;">
+        <div class="container">
+            <h1>Expense Tracker</h1>
+            <form id="expense-form">
+                <input type="text" id="expense-name" placeholder="Expense Name" required>
+                <input type="number" id="expense-amount" placeholder="Amount" required>
+                <button type="submit">Add Expense</button>
+            </form>
+            <table id="expense-table">
+                <thead>
+                    <tr>
+                        <th>Expense</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="expense-list">
+                </tbody>
+            </table>
+            <h2>Total: $<span id="total-amount">0.00</span></h2>
+        </div>
     </div>
     <script src="script.js"></script>
+    <nav>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#budget">Budget</a>
+        <a href="#expenses">Expenses</a>
+    </nav>
 </body>
 </html>

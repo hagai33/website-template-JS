@@ -71,3 +71,25 @@ th {
 .delete-btn:hover {
     background: #ff1a1a;
 }
+
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+nav a:hover {
+    background-color: #555;
+}
